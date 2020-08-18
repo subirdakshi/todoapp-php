@@ -8,7 +8,7 @@ if (empty($_SESSION)) {
     $data = $user->getData('', ['id' => $_SESSION['id']]);
     $row = $data->fetch_assoc();
     if (empty($row['img_path'])) {
-        $img_path = "https://www.nicepng.com/png/full/136-1366211_group-of-10-guys-login-user-icon-png.png";
+        $img_path = "../profilePic/defaultUser.png";
     } else {
         $img_path = $row['img_path'];
     }

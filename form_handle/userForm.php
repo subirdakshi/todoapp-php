@@ -49,10 +49,11 @@ if (isset($_POST['editName']) && isset($_POST['editEmail'])) {
                 if (!empty($path)) {
                     unlink($path);
                 }
-                if(!is_dir("../profilePic/" . $_SESSION['id'])){
-                    mkdir("../profilePic/" .$_SESSION['id']);
+                if(!is_dir("../profilePic")){
+                    mkdir("../profilePic");
                 }
-                $path = "../profilePic/" .$_SESSION['id']. "/" . $file_name;
+                $img_name = str_replace("image/",".",$file_type);
+                $path = "../profilePic/" . $_SESSION['id'] . $img_name;
                 move_uploaded_file($file_tmp, $path);
             }
         }
