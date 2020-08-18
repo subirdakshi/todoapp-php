@@ -66,13 +66,16 @@ $(document).ready(function () {
         }
 
         if (res === true) {
+            $('#signin').html(`<img src="${PATH_NAME_JS}/public/img/loader.svg" width="20px">`);
             $('#signin').attr('disabled', 'disabled');
             fetch(`${PATH_NAME_JS}/form_handle/userSignReg.php`, {
                 method: 'POST',
                 body: new FormData(document.getElementById('signInForm'))
             }).then(response => response.json()).then(data => {
+                $('#signin').html(`<i class="fa fa-sign-in" aria-hidden="true"></i> Sign In`);
                 $('#signin').removeAttr('disabled');
                 if (data[0]['status'] === 1) {
+                    showMsg(1, data[0]['msg']);
                     $('#signInForm').trigger('reset'); 
                     window.location.reload();
                 } else {

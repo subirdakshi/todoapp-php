@@ -11,7 +11,7 @@ declare(strict_types=1);
 //       $_SERVER['SERVER_NAME'],"/www/todoapp"
 //     );
 //   }
-define("PATH_NAME","../");
+define("PATH_NAME", "../");
 // define("PATH_NAME", realpath($_SERVER["DOCUMENT_ROOT"])."/todoapp");
 // define("PATH_NAME", "../todoapp");
 
@@ -30,40 +30,42 @@ class TodoApp extends Database
     {
         //FIRST CHECK THAT THE TABLE EXISTS OR NOT
         $this->table_name = $table_name;
-        if ($this->table_name === 'todos') {
-            $sql = "CREATE TABLE IF NOT EXISTS `$this->table_name` (
-            `id` int(100) NOT NULL AUTO_INCREMENT,
-            `user_id` int(100) NOT NULL,
-            `title` varchar(255) NOT NULL,
-            `note` varchar(3000) NOT NULL,
-            `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (ID)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8";
-            $stmt_table = $this->connect()->query($sql) or die("ERROR TO CREATE TABLE");
-        } else if ($this->table_name === 'users') {
-            $sql = "CREATE TABLE IF NOT EXISTS `$this->table_name` (
-                `id` int(100) NOT NULL AUTO_INCREMENT,
-                `name` varchar(255) NOT NULL,
-                `email` varchar(255) NOT NULL,
-                `password` varchar(3000) NOT NULL,
-                `ptoken` varchar(255) NOT NULL,
-                `password_change` varchar(100) NOT NULL DEFAULT 0,
-                `phone` varchar(255) NOT NULL,
-                `gender` varchar(255) NOT NULL,
-                `dob` varchar(255) NOT NULL,
-                `img_path` varchar(255) NOT NULL,
-                `vtoken` varchar(255) NOT NULL,
-                `email_verified` int(10) NOT NULL DEFAULT 0, 
-                `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (ID),
-                UNIQUE(`email`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8";
-            $stmt_table = $this->connect()->query($sql) or die("ERROR TO CREATE TABLE");
-        } else {
-            die("PLEASE ENTER CORRECT TABLE NAME");
-        }
+        // if ($this->table_name === 'todos') {
+        //     $sql = "CREATE TABLE IF NOT EXISTS `$this->table_name` (
+        //     `id` int(100) NOT NULL AUTO_INCREMENT,
+        //     `user_id` int(100) NOT NULL,
+        //     `title` varchar(255) NOT NULL,
+        //     `note` text(3000) NOT NULL,
+        //     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        //     `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        //     PRIMARY KEY (ID)
+        //     ) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+        //     $stmt_table = $this->connect()->query($sql) or die("ERROR TO CREATE TABLE");
+        // } else if ($this->table_name === 'users') {
+        //     $sql = "CREATE TABLE IF NOT EXISTS `$this->table_name` (
+        //         `id` int(100) NOT NULL AUTO_INCREMENT,
+        //         `name` varchar(255) NOT NULL,
+        //         `email` varchar(255) NOT NULL,
+        //         `password` varchar(255) NOT NULL,
+        //         `ptoken` varchar(255) NOT NULL,
+        //         `password_change` varchar(100) NOT NULL DEFAULT 0,
+        //         `phone` varchar(255) NOT NULL,
+        //         `gender` varchar(255) NOT NULL,
+        //         `dob` varchar(255) NOT NULL,
+        //         `img_path` varchar(255) NOT NULL,
+        //         `vtoken` varchar(255) NOT NULL,
+        //         `email_verified` int(10) NOT NULL DEFAULT 0, 
+        //         `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        //         `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+        //         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+        //     $sql_a = "ALTER TABLE `users` ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `email` (`email`);";
+        //     // $sql_b = "ALTER TABLE `users` MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;COMMIT;";
+        //     $this->connect()->query($sql) or die("ERROR TO CREATE TABLE");
+        //     $this->connect()->query($sql_a) or die("ERROR TO CREATE TABLE");
+        //     $this->connect()->query($sql_b) or die("ERROR TO CREATE TABLE");
+        // } else {
+        //     die("PLEASE ENTER CORRECT TABLE NAME");
+        // }
     }
 
     //GET DATA
@@ -181,14 +183,14 @@ class TodoApp extends Database
     {
         if (!empty($updateDataArr) && !empty($idArr)) {
             foreach ($idArr as $key => $val) {
-                $key = mysqli_real_escape_string($this->connect(),$key);
+                $key = mysqli_real_escape_string($this->connect(), $key);
                 $id = $key . ' = ? ';
                 $idValue = $val;
                 $idvalType = gettype($val)[0];
             }
 
             foreach ($updateDataArr as $key => $value) {
-                $key = mysqli_real_escape_string($this->connect(),$key);
+                $key = mysqli_real_escape_string($this->connect(), $key);
                 // $value = mysqli_real_escape_string($this->connect(),$value);
 
                 $fieldArr[] = $key . ' = ? ';
@@ -220,12 +222,12 @@ class TodoApp extends Database
 
 
     //DELETE DATA
-    public function deleteData($id,$val)
+    public function deleteData($id, $val)
     {
         if (!empty($id)) {
             // foreach ($idArr as $key => $val) {
             //     // $key = mysqli_real_escape_string($this->connect(),$key);
-                
+
             //     $id = $key;
             //     foreach ($val as $k => $v) {
             //         // $k = mysqli_real_escape_string($this->connect(),$k);

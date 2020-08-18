@@ -1,5 +1,7 @@
 <!-------------Header---------------->
 <?php 
+
+ini_set('display_erros','1');
 include('./header.php');
 if (!empty($_SESSION)) {
     header("location: index.php");

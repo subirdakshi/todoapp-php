@@ -42,7 +42,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
 
 //FOR REGISTRATION
-if (isset($_POST['regName']) && $_POST['regEmail'] && $_POST['regPassword'] && isset($_POST['regCnfPassword'])) {
+if (isset($_POST['regName']) && $_POST['regEmail'] && $_POST['regPassword']) {
     $name = $_POST['regName'];
     $email = $_POST['regEmail'];
     $pass = $_POST['regPassword'];
@@ -55,13 +55,11 @@ if (isset($_POST['regName']) && $_POST['regEmail'] && $_POST['regPassword'] && i
 
     if ($data->num_rows === 0) {
         $pass = password_hash($pass, PASSWORD_BCRYPT);
-
         $vtoken = md5(time());
-        $userData = ['name' => $name, 'email' => $email, 'password' => $pass, 'vtoken' => $vtoken, 'created_at'=>Date("Y-m-d H:i:s"), 'updated_at'=>Date("Y-m-d H:i:s")];
-        
-        $newUser = new TodoApp('users');
 
-        if ($newUser->insertData($userData)) {
+        $insert =  $user->insertData(['name' => $name, 'email' => $email, 'password' => $pass, 'vtoken' => $vtoken]);
+        
+        if ($insert) {
             array_push($msg, ["status" => 1, "msg" => "Registration successfull. Login to your account and write your first todo."]);
             $u = new TodoApp('users');
             $d = $u->getData('', ['email' => $email])->fetch_assoc();
