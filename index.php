@@ -1,2 +1,2 @@
 <?php 
-header('location: https://'.$_SERVER["SERVER_NAME"].'/todoapp');
+header('location: https://'.$_SERVER["SERVER_NAME"].'/todoapp/');
