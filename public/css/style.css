@@ -9,7 +9,7 @@
 .modal-dialog,
 .modal-content {
     /* 80% of window height */
-    height: 90vh;
+    max-height: 90vh;
 }
 
 .modal-body {
