@@ -1,3 +1,23 @@
+.tox-tinymce{
+  min-height: calc(100vh - 44.5vh)!important;
+}
+@media (min-height:800px){
+  .tox-tinymce{
+    min-height: calc(100vh - 40vh)!important;
+  }
+}
+.modal-dialog,
+.modal-content {
+    /* 80% of window height */
+    height: 90vh;
+}
+
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
 p{
   margin-top: none;
    margin-bottom: 0;
